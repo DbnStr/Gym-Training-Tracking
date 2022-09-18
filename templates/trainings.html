@@ -1,10 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {% for training in trainings %}
+    <div class="trainings">
+        {% for (idx, training) in trainings.items() %}
         <div class='training'>
-            <h3>{{ training.start_datetime }}</h3>
-            <h3>{{ training.finish_datetime }}</h3>
+            <div class="training_idx">{{idx + 1}}</div>
+            <div class="training_data">
+                <h3>Время начала тренировки: {{ training.start_datetime }}</h3>
+                <h3>Время окончания тренировки: {{ training.finish_datetime }}</h3>
+            </div>
+            <form class="training_more" action="{{ url_for('get_exercises', customer_id=customer_id,training_id=training.id) }}">
+                <button class="button is-block is-primary is-normal is-fullwidth">Подробнее</button>
+            </form>
         </div>
     {% endfor %}
+    </div>
 {% endblock %}

@@ -78,12 +78,12 @@ def signup_post():
 @login_required
 def get_trainings(customer_id):
     trainings_data = db.get_all_trainings(customer_id)
-    trainings = []
+    trainings = {}
     for i in range(len(trainings_data)):
         training = Training(*trainings_data[i])
-        trainings.append(training)
+        trainings[i] = training
     print(trainings_data)
-    return render_template('trainings.html', trainings=trainings)
+    return render_template('trainings.html', customer_id=customer_id, trainings=trainings)
 
 @app.route('/customers/<int:customer_id>/trainings/<int:training_id>/exercises', methods=['GET'])
 @login_required
@@ -160,7 +160,7 @@ def add_strength_exercise(data, training_id):
         'trainingId': training_id
     })[0]
     if strengthExerciseId:
-        flag = False
+        flag = True
         for approach in data['approaches']:
             flag = flag & db.insert('approach', {
                 'datetimeOfStart': approach['datetimeOfStart'],
