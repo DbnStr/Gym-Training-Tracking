@@ -91,23 +91,28 @@ def get_exercises(customer_id, training_id):
     running_exercises_data = db.execute_select_all_query('SELECT * FROM running_exercise WHERE trainingid={}'.format(training_id))
     strength_exercises_data = db.execute_select_all_query('SELECT * FROM strength_exercise WHERE trainingid={}'.format(training_id))
 
-    running_exercises, strength_exercises = [], []
+    running_exercises, strength_exercises = {}, {}
     for i in range(len(running_exercises_data)):
         running_exercise = RunningExercise(*running_exercises_data[i])
-        running_exercise.exercise_name = db.execute_select_one_query('SELECT name FROM running_exercise_type '
+        running_exercise.name = db.execute_select_one_query('SELECT name FROM running_exercise_type '
                                                        'WHERE runningexercisetypeid={}'.format(running_exercise.running_exercise_type_id))[0]
-        print(running_exercise.exercise_name)
-        running_exercises.append(running_exercise)
+        running_exercises[i] = running_exercise
     for i in range(len(strength_exercises_data)):
         strength_exercise = StrengthExercise(*strength_exercises_data[i])
-        strength_exercise.exercise_name = db.execute_select_one_query('SELECT name FROM strength_exercise_type '
+        strength_exercise.name = db.execute_select_one_query('SELECT name FROM strength_exercise_type '
                                                        'WHERE strengthexercisetypeid={}'.format(strength_exercise.strength_exercise_type_id))[0]
-        print(strength_exercise.exercise_name)
-        strength_exercises.append(strength_exercise)
-    print(strength_exercises)
-    print(running_exercises)
-    return "Success"
+        strength_exercises[i] = strength_exercise
+    return render_template('exercises.html', strength_exercises=strength_exercises, running_exercises=running_exercises, customer_id=customer_id, training_id=training_id)
 
+@app.route('/customers/<int:customer_id>/trainings/<int:training_id>/running_exercises/<int:exercise_id>')
+@login_required
+def get_approaches(customer_id, training_id, exercise_id):
+    approaches_data = db.execute_select_one_query('SELECT * FROM approach WHERE strengthexerciseid={}'.format(exercise_id))
+    approaches = {}
+    for i in range(len(approaches_data)):
+        approach = RunningExercise(*approaches_data[i])
+        approaches[i] = approach
+    return "Success"
 
 @login_manager.unauthorized_handler
 def unauthorized_handler():

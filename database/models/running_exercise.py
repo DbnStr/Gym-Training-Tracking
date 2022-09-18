@@ -2,7 +2,7 @@ from database.model import Model
 
 class RunningExercise(Model):
 
-    exercise_name = None
+    name = None
 
     def __init__(self, id, start_datetime, finish_datetime,
                  distance, time, average_speed, average_pulse,

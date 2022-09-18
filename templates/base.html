@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
- 
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,23 +8,24 @@
     <title>Flask Auth Example</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
     <style>
-        .trainings {
+        .trainings, .exercises {
             overflow: auto;
             background-color: antiquewhite;
             margin: auto auto;
             width:800px;
-            height:500px
+            height:500px;
+            border-radius: 12px;
         }
- 
-        .training {
+
+        .training, .strength_exercise, .running_exercise{
             font-size: medium;
             position: relative;
             color: #c9a97e;
             border: 4px solid #c9a97e;
-            border-radius: 10px;
+            border-radius: 12px;
             margin: 20px 10px;
         }
- 
+
         .training_idx {
             font-size: xx-large;
             position: absolute;
@@ -32,12 +33,28 @@
             left: 20px;
             display: inline-block;
         }
- 
-        .training_data {
+
+        .strength_training_idx {
+            font-size: xx-large;
+            position: absolute;
+            bottom: 12px;
+            left: 20px;
+            display: inline-block;
+        }
+
+        .running_training_idx {
+            font-size: xx-large;
+            position: absolute;
+            bottom: 36px;
+            left: 20px;
+            display: inline-block;
+        }
+
+        .training_data, .exercise_data {
             display: inline-block;
             position: relative
         }
- 
+
         .training_more {
             display: inline-block;
             position: absolute;
@@ -46,14 +63,14 @@
         }
     </style>
 </head>
- 
+
 <body>
     <section class="hero is-primary is-fullheight">
- 
+
         <div class="hero-head">
             <nav class="navbar">
                 <div class="container">
- 
+
                     <div id="navbarMenuHeroA" class="navbar-menu">
                         <div class="navbar-end">
                             <a href="{{ url_for('index') }}" class="navbar-item">
@@ -70,7 +87,7 @@
                 </div>
             </nav>
         </div>
- 
+
         <div class="hero-body">
             <div class="container has-text-centered">
                {% block content %}
@@ -79,5 +96,5 @@
         </div>
     </section>
 </body>
- 
+
 </html>

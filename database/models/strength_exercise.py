@@ -2,7 +2,7 @@ from database.model import Model
 
 class StrengthExercise(Model):
 
-    exercise_name = None
+    name = None
 
     def __init__(self, id, start_datetime, finish_datetime,
                  training_id, strength_exercise_type_id, trainer_id):
