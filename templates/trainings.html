@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% for training in trainings %}
+        <div class='training'>
+            <h3>{{ training.start_datetime }}</h3>
+            <h3>{{ training.finish_datetime }}</h3>
+        </div>
+    {% endfor %}
+{% endblock %}

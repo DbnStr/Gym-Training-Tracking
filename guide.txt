@@ -1,0 +1,5 @@
+Запуск postgresql: pg_ctl -D /opt/homebrew/var/postgresql@14 start
+brew install postgresql - если не запускается
+Зайти в BD для редактирования настрое ролей: psql postgres. postgres - мейн владелец.
+Логин и пароль: muscle_man 12345678
+Запуск flask приложения: flask --app app run
