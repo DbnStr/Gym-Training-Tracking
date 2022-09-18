@@ -85,7 +85,7 @@ def get_trainings(customer_id):
 @app.route('/customers/<int:customer_id>/trainings/<int:training_id>/exercises', methods=['GET'])
 @login_required
 def get_exercises(customer_id, training_id):
-
+    return False
 
 @login_manager.unauthorized_handler
 def unauthorized_handler():
