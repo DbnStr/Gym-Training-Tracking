@@ -110,7 +110,7 @@ def get_approaches(customer_id, training_id, exercise_id):
     approaches_data = db.execute_select_one_query('SELECT * FROM approach WHERE strengthexerciseid={}'.format(exercise_id))
     approaches = {}
     for i in range(len(approaches_data)):
-        approach = RunningExercise(*approaches_data[i])
+        approach = Approach(*approaches_data[i])
         approaches[i] = approach
     return "Success"
 
