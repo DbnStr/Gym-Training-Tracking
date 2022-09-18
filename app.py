@@ -2,6 +2,9 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from database import db
 import constants
 from database.models.customer import Customer
+from database.models.running_exercise import RunningExercise
+from database.models.strength_exercise import StrengthExercise
+from database.models.approach import Approach
 from flask_login import *
 
 from database.models.training import Training
@@ -85,7 +88,19 @@ def get_trainings(customer_id):
 @app.route('/customers/<int:customer_id>/trainings/<int:training_id>/exercises', methods=['GET'])
 @login_required
 def get_exercises(customer_id, training_id):
-    return False
+    running_exercises_data = db.execute_select_all_query('SELECT * FROM running_exercise WHERE trainingid={}'.format(training_id))
+    strength_exercises_data = db.execute_select_all_query('SELECT * FROM strength_exercise WHERE trainingid={}'.format(training_id))
+
+    running_exercises, strength_exercises = [], []
+    for i in range(len(running_exercises_data)):
+        running_exercise = RunningExercise(*running_exercises_data[i])
+        running_exercises.append(running_exercise)
+    for i in range(len(strength_exercises_data)):
+        strength_exercise = StrengthExercise(*strength_exercises_data[i])
+        strength_exercises.append(strength_exercise)
+    print(strength_exercises)
+    print(running_exercises)
+    return "Success"
 
 @login_manager.unauthorized_handler
 def unauthorized_handler():
@@ -167,7 +182,7 @@ def customer_came(customer_id):
         return "training cannot be added"
 
 #Клиент выходит из спортзала, тренировка окончена
-@app.route('/customers/<int:customerId>/trainings', methods=['PATCH'])
+@app.route('/customers/<int:customer_id>/trainings', methods=['PATCH'])
 def complete_training(customer_id):
     queries = request.args.to_dict()
     if queries.get('lastTraining'):
@@ -179,7 +194,7 @@ def complete_training(customer_id):
     return "training cannot be completed"
 
 #весы добавили данные о взвешивании клиента
-@app.route('/customers/<int:customerId>/weighings', methods=['POST'])
+@app.route('/customers/<int:customer_id>/weighings', methods=['POST'])
 def add_weighing(customer_id):
     request_data = request.get_json()
     if db.insert('weighing', {
