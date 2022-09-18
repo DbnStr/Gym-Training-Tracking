@@ -94,13 +94,20 @@ def get_exercises(customer_id, training_id):
     running_exercises, strength_exercises = [], []
     for i in range(len(running_exercises_data)):
         running_exercise = RunningExercise(*running_exercises_data[i])
+        running_exercise.exercise_name = db.execute_select_one_query('SELECT name FROM running_exercise_type '
+                                                       'WHERE runningexercisetypeid={}'.format(running_exercise.running_exercise_type_id))[0]
+        print(running_exercise.exercise_name)
         running_exercises.append(running_exercise)
     for i in range(len(strength_exercises_data)):
         strength_exercise = StrengthExercise(*strength_exercises_data[i])
+        strength_exercise.exercise_name = db.execute_select_one_query('SELECT name FROM strength_exercise_type '
+                                                       'WHERE strengthexercisetypeid={}'.format(strength_exercise.strength_exercise_type_id))[0]
+        print(strength_exercise.exercise_name)
         strength_exercises.append(strength_exercise)
     print(strength_exercises)
     print(running_exercises)
     return "Success"
+
 
 @login_manager.unauthorized_handler
 def unauthorized_handler():
