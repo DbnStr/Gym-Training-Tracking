@@ -10,3 +10,4 @@ class Approach(Model):
         self.weight = weight
         self.repetition = repetition
         self.strength_exercise_id = strength_exercise_id
+        self.duration = int(round((finish_datetime - start_datetime).total_seconds() / 60))

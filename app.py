@@ -104,15 +104,15 @@ def get_exercises(customer_id, training_id):
         strength_exercises[i] = strength_exercise
     return render_template('exercises.html', strength_exercises=strength_exercises, running_exercises=running_exercises, customer_id=customer_id, training_id=training_id)
 
-@app.route('/customers/<int:customer_id>/trainings/<int:training_id>/running_exercises/<int:exercise_id>')
+@app.route('/customers/<int:customer_id>/trainings/<int:training_id>/strength_exercises/<int:exercise_id>')
 @login_required
 def get_approaches(customer_id, training_id, exercise_id):
-    approaches_data = db.execute_select_one_query('SELECT * FROM approach WHERE strengthexerciseid={}'.format(exercise_id))
+    approaches_data = db.execute_select_all_query('SELECT * FROM approach WHERE strengthexerciseid={}'.format(exercise_id))
     approaches = {}
     for i in range(len(approaches_data)):
         approach = Approach(*approaches_data[i])
         approaches[i] = approach
-    return "Success"
+    return render_template('approaches.html', approaches=approaches)
 
 @login_manager.unauthorized_handler
 def unauthorized_handler():

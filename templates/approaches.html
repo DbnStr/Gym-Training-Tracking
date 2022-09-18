@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+ 
+{% block content %}
+    <div class="trainings">
+        {% for (idx, approach) in approaches.items() %}
+        <div class='training'>
+            <div class="training_idx">{{idx + 1}}</div>
+            <div class="training_data">
+                <h3>Продолжительность: {{ approach.duration }} мин.</h3>
+                <h3>Вес: {{ approach.weight }} кг.</h3>
+                <h3>Количество повторений: {{ approach.repetition }}</h3>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

@@ -25,14 +25,11 @@
                 <div class="running_training_idx">{{idx + 1}}</div>
                 <div class="exercise_data">
                     <h2>{{exercise.exercise_name}}</h2>
-                    <h3>Расстояние: {{ exercise.distance }}</h3>
-                    <h3>Продолжительность: {{ exercise.time }}</h3>
-                    <h3>Средняя скорость: {{ exercise.average_speed }}</h3>
-                    <h3>Средний пульс: {{ exercise.average_pulse }}</h3>
+                    <h3>Расстояние: {{ exercise.distance }} км.</h3>
+                    <h3>Продолжительность: {{ exercise.time }} мин.</h3>
+                    <h3>Средняя скорость: {{ exercise.average_speed }} км/ч</h3>
+                    <h3>Средний пульс: {{ exercise.average_pulse }} уд/мин</h3>
                 </div>
-                <form class="training_more" action="{{ url_for('get_approaches', customer_id=customer_id,training_id=training_id, exercise_id=exercise.id) }}">
-                  <button class="button is-block is-primary is-normal is-fullwidth">Подробнее</button>
-                </form>
             </div>
             {% endfor %}
         </div>
