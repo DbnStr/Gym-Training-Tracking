@@ -8,7 +8,7 @@
             <div class='strength_exercise'>
                 <div class="strength_training_idx">{{idx + 1}}</div>
                 <div class="exercise_data">
-                    <h2>{{exercise.exercise_name}}</h2>
+                    <h2>Название упражнения: {{exercise.name}}</h2>
                     <h3>Время начала упражнения: {{ exercise.start_datetime }}</h3>
                     <h3>Время окончания упражнения: {{ exercise.finish_datetime }}</h3>
                 </div>
@@ -24,7 +24,7 @@
             <div class='running_exercise'>
                 <div class="running_training_idx">{{idx + 1}}</div>
                 <div class="exercise_data">
-                    <h2>{{exercise.exercise_name}}</h2>
+                    <h2>Название упражнения: {{exercise.name}}</h2>
                     <h3>Расстояние: {{ exercise.distance }} км.</h3>
                     <h3>Продолжительность: {{ exercise.time }} мин.</h3>
                     <h3>Средняя скорость: {{ exercise.average_speed }} км/ч</h3>

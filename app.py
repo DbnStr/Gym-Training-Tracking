@@ -40,7 +40,13 @@ def login_post():
     email = request.form.get('email')
     password = request.form.get('password')
 
-    customer = Customer(*db.get_consumer_by_email(email))
+    customer_data = db.get_consumer_by_email(email)
+
+    if customer_data == None:
+        flash('Проверьте правильность ввода данных и повторите попытку.')
+        return redirect(url_for('login_get'))
+
+    customer = Customer(*customer_data)
 
     if not customer or (customer.password != password):
         flash('Please check your login details and try again.')

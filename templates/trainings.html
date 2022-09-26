@@ -6,8 +6,8 @@
         <div class='training'>
             <div class="training_idx">{{idx + 1}}</div>
             <div class="training_data">
-                <h3>Время начала тренировки: {{ training.start_datetime }}</h3>
-                <h3>Время окончания тренировки: {{ training.finish_datetime }}</h3>
+                <h3>Дата и время начала тренировки: {{ training.start_datetime }}</h3>
+                <h3>Дата и время окончания тренировки: {{ training.finish_datetime }}</h3>
             </div>
             <form class="training_more" action="{{ url_for('get_exercises', customer_id=customer_id,training_id=training.id) }}">
                 <button class="button is-block is-primary is-normal is-fullwidth">Подробнее</button>
